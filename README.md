@@ -1,18 +1,6 @@
-# Node DB1 Project Starter Code
-
-## Introduction
-
 - Relational Databases
 - Writing Basic SQL Queries
 - Writing Basic Queries using Knex.js
-
-## Instructions
-
-### Task 1: Project Setup and Submission
-
-Your assignment page on Canvas should contain instructions for submitting this project. If you are still unsure, reach out to School Staff.
-
-### Task 2: Minimum Viable Product
 
 ### 2.1 Write Basic SQL Queries
 
@@ -31,11 +19,24 @@ Visit [SQL Try Editor at W3Schools.com](https://www.w3schools.com/Sql/trysql.asp
 
 We have provided some records inside the "accounts" table of the `budget.db3` database. You can restore the database (even after deleting the database) by running the following command:
 
+
+
+
+
+
+
+
+
+
+
 ```js
 npm run resetdb
 ```
 
-#### Accounts Schema
+
+
+
+#### Accounts Schema_____________________________
 
 | field  | data type        | metadata                                            |
 | ------ | ---------------- | --------------------------------------------------- |
@@ -43,7 +44,11 @@ npm run resetdb
 | name   | string           | required, unique                                    |
 | budget | numeric          | required                                            |
 
-#### Write Model Functions
+
+
+
+
+#### Write Model Functions _____________________
 
 - Write the following db access functions inside `api/accounts/accounts-model.js` using Knex:
 
@@ -53,19 +58,31 @@ npm run resetdb
   - `updateById` resolves to the updated account
   - `deleteById` resolves to the deleted account
 
-- Here is a cheatsheet for working with SQLite with Knex:
+
+
+
+
+
+
+
+
+- Here is a cheat sheet for working with SQLite with Knex:
 
 ```js
 db('foo-table') // returns a promise that resolves to an **array** with all records in the table
 db('foo-table').where({ role: 'Student', active: true }) // resolves to an **array** of all records that satisfy the where
 db('foo-table').where('name', 'Mary') // is an alternative for when there is just one where condition
+
 db('foo-table').where('id', 7).first() // will resolve to the **record** we want (if the id is unique for a table) or undefined
+
 db('foo-table').insert({ bar: 'baz' }) // resolves to an **array** containing the **ids of the records** inserted into the table
 db('foo-table').where('id', id).update({ bar: 'new bar' }) // resolves to the **number of records** affected by the update
 db('foo-table').where('id', id).delete() // resolves to the **number of records** affected by the delete
 ```
 
-#### Write Middleware
+
+
+#### Write Middleware __________________________
 
 - Write the following middlewares inside `api/accounts/accounts-middleware.js`:
 
@@ -81,7 +98,10 @@ db('foo-table').where('id', id).delete() // resolves to the **number of records*
 
   - `checkAccountNameUnique` returns a status 400 with a `{ message: "that name is taken" }` if the _trimmed_ `req.body.name` already exists in the database
 
-### Write Accounts API
+
+
+
+### Write Accounts API___________________________________________
 
 - Write CRUD for the `accounts` resource, using the middlewares and model functions above wherever appropriate:
 
@@ -94,7 +114,10 @@ db('foo-table').where('id', id).delete() // resolves to the **number of records*
 - Manually test your endpoints with a REST client like `Insomnia` or `Postman` to check they are working as expected.
 - Test your endpoints automatically by running `npm test`.
 
-#### Important Notes
+
+
+
+#### Important Notes_____________________________________________
 
 - You are welcome to create additional files but **do not move or rename existing files** or folders.
 - Do not alter your `package.json` file except to install additional libraries or add additional scripts.
