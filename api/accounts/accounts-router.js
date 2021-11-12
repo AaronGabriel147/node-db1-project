@@ -1,3 +1,13 @@
+
+
+
+
+
+// WHY MD BEFORE MIDDLEWARE ARGS??????????????????????? 
+
+
+
+
 const router = require('express').Router()
 
 const Accounts = require('../accounts/accounts-model')
@@ -6,6 +16,8 @@ const Accounts = require('../accounts/accounts-model')
 // create
 // updateById
 // deleteById
+
+const mid = require('../accounts/accounts-middleware')
 
 
 // Async version
@@ -26,21 +38,12 @@ router.get('/', (req, res, next) => {
       res.status(200).json(item)
       // throw new Error('Error')
     })
-    .catch(err => {
-      res.status(500).json({ message: 'Something went wrong! 500 error' })
-    })
-
+    .catch(next)
 })
 
-// .catch(next) // This should work if the catch all was working....
 
 
-
-
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ getById @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
+// @@@@@@@@@@@@@@@@@@@@@@@@@ getById @@@@@@@@@@@@@@@@@@@@@@@@
 // //  ________________________________________________________
 // // THE version to test out the catch all 500 error
 // router.get('/:id', async (req, res, next) => {
@@ -58,8 +61,6 @@ router.get('/', (req, res, next) => {
 //     next(err)
 //   }
 // })
-// // ________________________________________________________
-
 
 // Notes
 // catch (error) { // if there is an error, catch it
@@ -71,7 +72,7 @@ router.get('/', (req, res, next) => {
 // next(err) is very versatile, it let you give any type of response you want, like:
 // next({ status: 402, message: 'You are not authorized' })}) 
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', mid.checkAccountId, async (req, res, next) => {
   try {
     const accounts = await Accounts.getById(req.params.id)
     res.status(200).json(accounts)
@@ -83,33 +84,40 @@ router.get('/:id', async (req, res, next) => {
 
 
 
-router.post('/', async (req, res, next) => {
+router.post('/',
+  mid.checkAccountPayload,
+  mid.checkAccountNameUnique,
+  async (req, res, next) => {
+    try {
+      res.json('PoStSsSSssSSsss')
+    } catch (err) {
+      next(err)
+    }
+  })
+
+
+
+router.put('/:id',
+  mid.checkAccountId,
+  mid.checkAccountPayload,
+  mid.checkAccountNameUnique,
+  async (req, res, next) => {
+    try {
+      res.json('Puttttttttt')
+    } catch (err) {
+      next(err)
+    }
+
+  });
+
+router.delete('/:id', mid.checkAccountId, async (req, res, next) => {
   try {
-    throw new Error('Eeeeeeeeeeeeeek')
+    res.json('DELETEEEEEEEEEEE')
   } catch (err) {
     next(err)
   }
+
 })
-
-
-
-// router.put('/:id', async (req, res, next) => {
-//   try {
-
-//   } catch (err) {
-//     next(err)
-//   }
-
-// });
-
-// router.delete('/:id', async (req, res, next) => {
-//   try {
-
-//   } catch (err) {
-//     next(err)
-//   }
-
-// })
 
 
 // router.use((err, req, res, next) => { // eslint-disable-line
