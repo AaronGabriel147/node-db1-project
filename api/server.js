@@ -25,12 +25,12 @@ server.get('/', (req, res) => { // Sanity check to connect to browser or HTTP cl
 
 
 
-// server.use('*', (req, res, next) => {
-//     // catch all 404 errors middleware
-//     // calling next with an arg, sends the arg as an err
-//     // to the err handling middleware!
-//     next({ status: 404, message: `${req.method} ${req.originalUrl} not found!` })
-// });
+// catch all 404 errors middleware
+// calling next with an arg, sends the arg as an err
+// to the err handling middleware!
+server.use('*', (req, res, next) => {
+    next({ status: 404, message: `${req.method} ${req.originalUrl} not found!` })
+});
 
 
 server.use(errorHandling) // will trap "".catch/500 errors" happening above
