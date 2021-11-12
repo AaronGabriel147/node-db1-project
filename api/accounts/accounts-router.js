@@ -1,13 +1,3 @@
-
-
-
-
-
-// WHY MD BEFORE MIDDLEWARE ARGS??????????????????????? 
-
-
-
-
 const router = require('express').Router()
 
 const Accounts = require('../accounts/accounts-model')
@@ -68,19 +58,27 @@ router.get('/', (req, res, next) => {
 // }
 // console.log(error);
 
-
 // next(err) is very versatile, it let you give any type of response you want, like:
 // next({ status: 402, message: 'You are not authorized' })}) 
 
+
+
+
+
 router.get('/:id', mid.checkAccountId, async (req, res, next) => {
-  try {
-    const accounts = await Accounts.getById(req.params.id)
-    res.status(200).json(accounts)
-    // throw new Error('Error')
-  } catch (err) {
-    next(err)
-  }
+  res.json(req.account)
 })
+
+// // Before middleqare
+// router.get('/:id', mid.checkAccountId, async (req, res, next) => {
+//   try {
+//     const account = await Accounts.getById(req.params.id)
+//     res.status(200).json(account)
+//     // throw new Error('Error')
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 
 
@@ -103,7 +101,7 @@ router.put('/:id',
   mid.checkAccountNameUnique,
   async (req, res, next) => {
     try {
-      res.json('Puttttttttt')
+      res.json('Puttttttttt') // Remember to add a id in the url param to test.
     } catch (err) {
       next(err)
     }
