@@ -30,13 +30,39 @@ function getById(id) {
 
 
 
+// // --INSERT INTO shippers (shippername, phone) VALUES ('acme 44', '(916) 500 9483');
+// // insert into shippers (shippername, phone) values ('acme 44', '(909) 123 1234');
+// // --SELECT * FROM shippers;
 
 
+// // -- Likely a W3Schools bug, buuut, would not work until I used case sensitivity with schema names. Like this:
+// // -- insert into shippers (ShipperName, Phone) values ('acme 44', '(909) 123 1234');
+// // select * from shippers; -- To check result.
 
-const create = account => {
-  // DO YOUR MAGIC
+
+// // -- And if you wanted to add just 1 property, it works unless it is a required field. It looks like this:
+// // -- insert into shippers (ShipperName) values ('acme 44');
+
+
+// return db('accounts').insert(account, 'id').then(ids => {
+//   const [id] = ids
+//   return getById(id)
+// })
+function create(account) {
+
 }
 
+
+// const create = account => {
+//   // DO YOUR MAGIC
+// }
+
+
+
+
+
+
+// ______________________________________________________
 
 
 const updateById = (id, account) => {
