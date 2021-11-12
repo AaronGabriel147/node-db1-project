@@ -16,6 +16,22 @@ server.get('/', (req, res) => { // Sanity check to connect to browser or HTTP cl
     })
 })
 
+// // mabs version
+// server.use('*', (req, res) => {
+//     res.status(500).json({
+//         message: "Incorrect path"
+//     })
+// })
+
+
+
+// server.use('*', (req, res, next) => {
+//     // catch all 404 errors middleware
+//     // calling next with an arg, sends the arg as an err
+//     // to the err handling middleware!
+//     next({ status: 404, message: `${req.method} ${req.originalUrl} not found!` })
+// });
+
 
 server.use(errorHandling) // will trap "".catch/500 errors" happening above
 
@@ -37,9 +53,21 @@ module.exports = server;
 
 // this is to disable eslint error for the next line
 // eslint-disable-next-line no-unused-vars  
+
 function errorHandling(err, req, res, next) {
+    console.log('inside errorhandling catch all')
     res.status(err.status || 500).json({
         message: err.message,
-        status: 500
     })
 }
+
+
+
+// %%%%%%%%% Mabs version %%%%%%%%%%%
+
+
+// server.use('*', (req,res)=> {
+//     res.status(500).json({
+//         message: "Incorrect path"
+//     })
+// })
