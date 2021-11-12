@@ -5,14 +5,21 @@ const Account = require('../accounts/accounts-model') // Import the model
 
 // - `checkAccountPayload` returns a status 400 with if `req.body` is invalid:
 
-// - If either name or budget are undefined, return `{ message: "name and budget are required" }`
+// x - If either name or budget are undefined, return `{ message: "name and budget are required" }`
 // - If name is not a string, return `{ message: "name of account must be a string" }`
 // - If the _trimmed_ name is shorter than 3 or longer than 100, return `{ message: "name of account must be between 3 and 100" }`
 // - If budget is not a number, return `{ message: "budget of account must be a number" }`
 // - If budget is a negative number or over one million, return  `{ message: "budget of account is too large or too small" }`
 
 
-exports.checkAccountPayload = async (req, res, next) => {
+// my first if statement returns a catch all 500 and I have no idea why!
+exports.checkAccountPayload = async (req, res, next) => { // Payload is the body of the request. in this case, the name & budget.
+  const error = { state: 400 }
+  const { name, budget } = req.body
+  if (name === undefined || budget === undefined) {
+    error.message = 'name and budget are required'
+    next(error)                                           // Goes to the next middleware.
+  }
 
 }
 

@@ -27,9 +27,6 @@ function getById(id) {
 
 
 
-
-
-
 // // --INSERT INTO shippers (shippername, phone) VALUES ('acme 44', '(916) 500 9483');
 // // insert into shippers (shippername, phone) values ('acme 44', '(909) 123 1234');
 // // --SELECT * FROM shippers;
